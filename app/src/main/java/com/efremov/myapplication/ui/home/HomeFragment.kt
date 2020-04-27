@@ -50,8 +50,11 @@ class HomeFragment : Fragment() {
 //        val numbers = buildBalancedArray(10, arrayOf(1, 12, 3, 9, 5, 2, 4, 6, 8, 10))
 //        text_home.text = numbers.toString()
 
-        val sequence = binaryVector(arrayListOf(1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1))
-        text_home.text = sequence.toString()
+//        val sequence = binaryVector(arrayListOf(1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1))
+//        text_home.text = sequence.toString()
+
+        val valid = checkValidBracers("{()}[]")
+        text_home.text = valid.toString()
     }
 
     // Написать функцию getPrimes(n) // Должна вернуть простые числа от 2 до n
@@ -222,5 +225,29 @@ class HomeFragment : Fragment() {
         }
 
         return maxSequenceLength
+    }
+
+    // Написать функцию, проверяющую правильно расставленные скобки;" check("{()}[]") // true
+    private fun checkValidBracers(sequence: String) : Boolean {
+        var isValidBracers = false
+        var openBracers = 0
+        var closedBracers = 0
+        var unusedBracers = 0
+
+        sequence.asSequence().forEach {
+            when (it) {
+                '{', '(', '[' -> {
+                    openBracers += 1
+                }
+                '}', ')', ']' -> {
+                    closedBracers += 1
+                }
+                else -> {
+                    unusedBracers += 1
+                }
+            }
+        }
+
+        return openBracers == closedBracers
     }
 }

@@ -114,30 +114,6 @@ class HomeFragment : Fragment() {
         return anagramPairs
     }
 
-    // Написать функцию, проверяющую правильно расставленные скобки;
-    // check("{()}[]") // true
-    // check("{[}]") // false
-    fun check(args: String) : Boolean {
-        val b1 = "{"
-        val b2 = "}"
-        val b3 = "("
-        val b4 = ")"
-        val b5 = "["
-        val b6 = "]"
-        var validBraces = false
-
-        if (args[0] == '{' &&
-            args[1] == '(' &&
-            args[2] == ')' &&
-            args[3] == '}' &&
-            args[4] == '[' &&
-            args[5] == ']') {
-            validBraces = true
-        }
-
-        return validBraces
-    }
-
     // Вам задано положительное целое число n, гарантируется, что n четное (то есть делится на 2).
     // Вы хотите построить такой массив a длины n, что:
     // Первые n/2 элементов a четные (делятся на 2);

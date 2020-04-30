@@ -53,6 +53,7 @@ class HomeFragment : Fragment() {
 //        val answer = checkValidBracers("{()}[]")
 
         answer = checkOccurrences("hgjkdhdjfdjkhh", "jhh").toString()
+//        answer = checkOccurrencesNoContainMethod("hgjkdhdjfdjkhh", "jhh").toString()
 
         text_home.text = answer
     }
@@ -246,6 +247,36 @@ class HomeFragment : Fragment() {
                             checkedSymbols.add(sChar)
                         }
                     }
+                }
+            }
+        }
+
+        return count
+    }
+
+    private fun checkOccurrencesNoContainMethod(j: String, s: String) : Int {
+        val jArray = arrayListOf<Char>()
+        val sArray = arrayListOf<Char>()
+        val checkedSymbols = arrayListOf<Char>()
+        j.asSequence().forEach { jArray.add(it) }
+        s.asSequence().forEach { sArray.add(it) }
+        var count = 0
+
+        sArray.asSequence().forEach { sChar ->
+            for (jArrayIndex in jArray.indices) {
+                if (sChar == jArray[jArrayIndex]) {
+                    var toAdd = true
+                    for (index in checkedSymbols.indices) {
+                        if (checkedSymbols[index] == sChar) {
+                            toAdd = false
+                            break
+                        }
+                    }
+                    if (toAdd) {
+                        count += 1
+                        checkedSymbols.add(sChar)
+                    }
+                    break
                 }
             }
         }

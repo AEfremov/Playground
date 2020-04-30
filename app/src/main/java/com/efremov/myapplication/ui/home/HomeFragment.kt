@@ -34,27 +34,27 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var answer = ""
+
 //        val count = getPrimes(1000)
 //        val sb = StringBuilder()
 //        count.asSequence().forEach {
 //            sb.append(it).append(",")
 //        }
-//        text_home.text = sb.toString()
 
 //        val s = summ(5, 10)
-//        text_home.text = s.toString()
 
 //        val anagrams = getAnagrams("нос", "сон", "снедь", "днесь")
-//        text_home.text = anagrams.toString()
 
 //        val numbers = buildBalancedArray(10, arrayOf(1, 12, 3, 9, 5, 2, 4, 6, 8, 10))
-//        text_home.text = numbers.toString()
 
 //        val sequence = binaryVector(arrayListOf(1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1))
-//        text_home.text = sequence.toString()
 
-        val valid = checkValidBracers("{()}[]")
-        text_home.text = valid.toString()
+//        val answer = checkValidBracers("{()}[]")
+
+        answer = checkOccurrences("hgjkdhdjfdjkhh", "jhh").toString()
+
+        text_home.text = answer
     }
 
     // Написать функцию getPrimes(n) // Должна вернуть простые числа от 2 до n
@@ -225,5 +225,31 @@ class HomeFragment : Fragment() {
         }
 
         return openBracers == closedBracers
+    }
+
+    // Даны две строки строчных латинских символов: строка J и строка S.
+    // Проверить, какое количество символов из S входит в J
+    private fun checkOccurrences(j: String, s: String) : Int {
+        val jArray = arrayListOf<Char>()
+        val sArray = arrayListOf<Char>()
+        val checkedSymbols = arrayListOf<Char>()
+        j.asSequence().forEach { jArray.add(it) }
+        s.asSequence().forEach { sArray.add(it) }
+        var count = 0
+
+        sArray.asSequence().forEach { sChar ->
+            if (!checkedSymbols.contains(sChar)) {
+                jArray.asSequence().forEachIndexed { index, jChar ->
+                    if (jChar == sChar) {
+                        count += 1
+                        if (!checkedSymbols.contains(sChar)) {
+                            checkedSymbols.add(sChar)
+                        }
+                    }
+                }
+            }
+        }
+
+        return count
     }
 }
